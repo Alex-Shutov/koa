@@ -8,27 +8,28 @@ const app = new Koa();
 const router = new Router();
 const port = 3500
 
-app.use(async (ctx,next) => {
+app.use(async (ctx:Koa.Context,next:()=>Promise<any>) => {
     try {
         await next();
     }
-    catch (err){
+    catch (err:any){
         ctx.status = err.status ?? 500
         ctx.body = {
             error:{
                 message : err.message ? err.message : 'Произошла ошибка сервера'
             }
         }
+
         ctx.app.emit('error',err,ctx);
     }
 })
 
-router.get('/', async ctx => {
+router.get('/', async (ctx:Koa.Context) => {
 
     ctx.body = "Я сервер"
 })
 
-router.get("/hello",async ctx => {
+router.get("/hello",async (ctx:Koa.Context) => {
     throw new Error('text');
     ctx.body = "Привет";
     ctx.status = 418;

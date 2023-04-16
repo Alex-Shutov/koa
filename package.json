@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "moment": "^2.29.4"
   },
   "devDependencies": {
+    "@total-typescript/ts-reset": "^0.4.2",
     "@types/koa": "^2.13.6",
     "@types/koa__router": "^12.0.0",
     "@types/node": "^18.15.11",
