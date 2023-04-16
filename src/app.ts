@@ -1,12 +1,22 @@
 import Koa from "koa";
 import Router from "@koa/router";
 import moment from "moment";
+import {RoutesController} from "./utils.js";
+import {getRoutes as getAlgosRoutes} from './algorythms/algorythms.controller.js'
+import {getRoutes as getTestRoutes} from './test/test.controller.js'
 
 const isLocalhost = !process.env.NODE_ENV;
 
-const app = new Koa();
+const app:Koa = new Koa();
 const router = new Router();
 const port = 3500
+
+app.use(async (ctx:Koa.Context,next:()=>Promise<any>) =>{
+    await new RoutesController(app, router)
+        .getRoutes(getAlgosRoutes)
+        .getRoutes(getTestRoutes)
+    await next()
+})
 
 app.use(async (ctx:Koa.Context,next:()=>Promise<any>) => {
     try {
@@ -29,11 +39,6 @@ router.get('/', async (ctx:Koa.Context) => {
     ctx.body = "Я сервер"
 })
 
-router.get("/hello",async (ctx:Koa.Context) => {
-    throw new Error('text123');
-    ctx.body = "Привет";
-    ctx.status = 418;
-})
 
 app.use(router.routes());
 app.use(router.allowedMethods());
