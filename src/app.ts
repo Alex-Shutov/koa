@@ -30,7 +30,7 @@ router.get('/', async (ctx:Koa.Context) => {
 })
 
 router.get("/hello",async (ctx:Koa.Context) => {
-    throw new Error('text');
+    throw new Error('text123');
     ctx.body = "Привет";
     ctx.status = 418;
 })
