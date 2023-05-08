@@ -4,8 +4,17 @@ import moment from "moment";
 import {RoutesController} from "./utils.js";
 import {getRoutes as getAlgosRoutes} from './algorythms/algorythms.controller.js'
 import {getRoutes as getTestRoutes} from './test/test.controller.js'
+import serve from 'koa-static'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const isLocalhost = !process.env.NODE_ENV;
+
+const __filename = fileURLToPath(import.meta.url);
+
+export const __dirname = path.dirname(__filename);
+
+const staticDirPath = path.join(__dirname, 'public');
 
 const app:Koa = new Koa();
 const router = new Router();
@@ -34,11 +43,11 @@ app.use(async (ctx:Koa.Context,next:()=>Promise<any>) => {
     }
 })
 
-router.get('/', async (ctx:Koa.Context) => {
+router.get("/", async(ctx, next) =>
+    serve(`${__dirname}/public`)({...ctx,...{path:'index.html'}}, next)
+);
 
-    ctx.body = "Я сервер"
-})
-
+app.use(serve(staticDirPath))
 
 app.use(router.routes());
 app.use(router.allowedMethods());

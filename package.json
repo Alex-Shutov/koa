@@ -6,20 +6,24 @@
   "main": "src/app.ts",
   "scripts": {
     "serve": "ts-node src/app.ts",
-    "start":"nodemon --ignore test/ --ext",
+    "start": "nodemon --ignore test/ --ext",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^12.0.0",
+    "bootstrap": "^5.2.3",
     "koa": "^2.14.2",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
     "moment": "^2.29.4"
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.4.2",
     "@types/koa": "^2.13.6",
     "@types/koa__router": "^12.0.0",
+    "@types/koa-static": "^4.0.2",
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
